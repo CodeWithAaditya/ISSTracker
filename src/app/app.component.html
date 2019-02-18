@@ -1,0 +1,17 @@
+<h1>ISS Data</h1>
+<h2>People In Space:{{people.numberOfPeople}}</h2>
+<ul>
+  <li *ngFor="let name of people.names">Name: {{name}}</li>
+</ul>
+<h3>Craft: {{people.craft}}</h3>
+<agm-map [latitude]="loc?.lat" [longitude]="loc?.lng" maxZoom="3" [usePanning]="true">
+  <agm-marker [label]="{text:'Current Location'}"
+    [latitude]="loc?.lat" [longitude]="loc?.lng"></agm-marker>
+
+  <agm-polyline [strokeColor]="'red'" [strokeWeight]="'5'">
+    <agm-polyline-point *ngFor="let loc of locationHistory" 
+        [latitude]="loc.lat"
+        [longitude]="loc.lng">
+    </agm-polyline-point>
+</agm-polyline>
+</agm-map>
