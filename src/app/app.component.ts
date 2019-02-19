@@ -33,10 +33,10 @@ export class AppComponent {
     let counter = 0;
     let intervalID = setInterval(() => {
       this.populateLocation();
-      if (++counter === 10) {
+      if (++counter === 100) {
         clearInterval(intervalID);
       }
-    }, 60000);
+    }, 10000);
   }
 
   refresh(){
