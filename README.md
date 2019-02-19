@@ -1,4 +1,6 @@
 # ISSDemo
+Website link: https://isstracker.firebaseapp.com/
+Do not run for too long to save cost on google map api
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 
