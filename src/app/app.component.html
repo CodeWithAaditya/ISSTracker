@@ -15,7 +15,7 @@
   <div class="col-9">
     <div class="card">
       <agm-map [latitude]="loc?.lat" [longitude]="loc?.lng" maxZoom="3" minZoom="3" [usePanning]="true">
-        <agm-marker [label]="{text:'Current Location'}" [latitude]="loc?.lat" [longitude]="loc?.lng"></agm-marker>
+        <agm-marker [label]="{text:'ISS Current Location'}" [latitude]="loc?.lat" [longitude]="loc?.lng"></agm-marker>
         <agm-marker [label]="{text: 'Your Location'}" [latitude]="yourLoc?.lat" [longitude]="yourLoc?.lng"></agm-marker>
         <agm-polyline [strokeColor]="'red'" [strokeWeight]="'5'">
           <agm-polyline-point *ngFor="let loc of locationHistory" [latitude]="loc.lat" [longitude]="loc.lng">
