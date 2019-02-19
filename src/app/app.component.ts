@@ -13,10 +13,12 @@ export class AppComponent {
   loc: ISSLocation;
   locationHistory: ISSLocation[];
   people: People;
-
+  passTime: string;
+  yourLoc: ISSLocation;
   constructor(private issService: IssService) {
     this.locationHistory = [];
     this.loc = new ISSLocation();
+    this.yourLoc = new ISSLocation();
     this.populateLocation();
     this.people = new People();
   }
@@ -27,10 +29,11 @@ export class AppComponent {
       this.populateLocation();
       if (++counter === 10) {
         clearInterval(intervalID);
-    }
+      }
     }, 100000);
 
     this.peopleInSpace();
+    this.passTimes();
 
     // this.issService.getLocationByIp().subscribe((data:any) => {
     //   console.log(data);
@@ -56,14 +59,23 @@ export class AppComponent {
     });
   }
 
-  peopleInSpace(){
+  peopleInSpace() {
     this.issService.getPeopleInSpace().subscribe((data: any) => {
       console.log(data);
       this.people.numberOfPeople = data.number;
-      for (let index = 0; index < this.people.numberOfPeople; index++) {        
+      for (let index = 0; index < this.people.numberOfPeople; index++) {
         this.people.names.push(data.people[index].name);
       }
       console.log(this.people);
-    });  
+    });
+  }
+
+  passTimes() {
+    this.issService.getPassTimes(35.73, -78.83).subscribe((data: any) => {
+      this.yourLoc.lat = 35.75;
+      this.yourLoc.lng = -78.83;
+      this.yourLoc.time = new Date(data.response[0].risetime * 1000).toString();
+      console.log(new Date(data.response[0].risetime * 1000));
+    });
   }
 }

@@ -1,17 +1,27 @@
 <h1>ISS Data</h1>
-<h2>People In Space:{{people.numberOfPeople}}</h2>
-<ul>
-  <li *ngFor="let name of people.names">Name: {{name}}</li>
-</ul>
-<h3>Craft: {{people.craft}}</h3>
-<agm-map [latitude]="loc?.lat" [longitude]="loc?.lng" maxZoom="3" [usePanning]="true">
-  <agm-marker [label]="{text:'Current Location'}"
-    [latitude]="loc?.lat" [longitude]="loc?.lng"></agm-marker>
-
-  <agm-polyline [strokeColor]="'red'" [strokeWeight]="'5'">
-    <agm-polyline-point *ngFor="let loc of locationHistory" 
-        [latitude]="loc.lat"
-        [longitude]="loc.lng">
-    </agm-polyline-point>
-</agm-polyline>
-</agm-map>
+<div class="row">
+  <div class="col-3">
+    <div class="card">
+      <h2>People In Space: {{people.numberOfPeople}}</h2>
+      <ul>
+        <li *ngFor="let name of people.names">Name: {{name}}</li>
+      </ul>
+      <h3>Craft: {{people.craft}}</h3>
+      <hr>
+      <h5>When the ISS Will reach you</h5>
+      <h6>{{yourLoc?.time}}</h6>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="card">
+      <agm-map [latitude]="loc?.lat" [longitude]="loc?.lng" maxZoom="3" minZoom="3" [usePanning]="true">
+        <agm-marker [label]="{text:'Current Location'}" [latitude]="loc?.lat" [longitude]="loc?.lng"></agm-marker>
+        <agm-marker [label]="{text: 'Your Location'}" [latitude]="yourLoc?.lat" [longitude]="yourLoc?.lng"></agm-marker>
+        <agm-polyline [strokeColor]="'red'" [strokeWeight]="'5'">
+          <agm-polyline-point *ngFor="let loc of locationHistory" [latitude]="loc.lat" [longitude]="loc.lng">
+          </agm-polyline-point>
+        </agm-polyline>
+      </agm-map>
+    </div>
+  </div>
+</div>

@@ -20,4 +20,8 @@ export class IssService {
   getPeopleInSpace(){
     return this.http.get("http://api.open-notify.org/astros.json");
   }
+
+  getPassTimes(latOfClient: number, lngOfClient: number){
+    return this.http.get(`http://test.mendapump.com/services/webdataservice.asmx/GetPassTime?lat=${latOfClient}&lon=${lngOfClient}`);
+  }
 }
