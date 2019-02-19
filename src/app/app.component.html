@@ -1,6 +1,6 @@
 <h1>ISS Data</h1>
 <div class="row">
-  <div class="col-3">
+  <div class="col-lg-3">
     <div class="card">
       <h2>People In Space: {{people.numberOfPeople}}</h2>
       <ul>
@@ -12,8 +12,14 @@
       <hr>
       <h6>{{yourLoc?.time}}</h6>
     </div>
+
+    <div class="card notes">
+      <h5>Notes:</h5>
+      <p>The line tracker only draws 10 times to save on google map api cost.</p>
+      <button class="btn btn-primary float-right" (click)="refresh()">Refresh Map</button>
+    </div>
   </div>
-  <div class="col-9">
+  <div class="col-lg-9">
     <div class="card">
       <agm-map [latitude]="loc?.lat" [longitude]="loc?.lng" maxZoom="3" minZoom="3" [usePanning]="true">
         <agm-marker [label]="{text:'ISS Current Location'}" [latitude]="loc?.lat" [longitude]="loc?.lng"></agm-marker>

@@ -19,31 +19,28 @@ export class AppComponent {
     this.locationHistory = [];
     this.loc = new ISSLocation();
     this.yourLoc = new ISSLocation();
-    this.populateLocation();
     this.people = new People();
   }
 
   ngOnInit() {
+    this.drawLine10Times();
+    this.peopleInSpace();
+    this.getClientLocation();
+  }
+
+  drawLine10Times(){
+    this.populateLocation();
     let counter = 0;
     let intervalID = setInterval(() => {
       this.populateLocation();
       if (++counter === 10) {
         clearInterval(intervalID);
       }
-    }, 100000);
+    }, 60000);
+  }
 
-    this.peopleInSpace();
-    //this.passTimes();
-    this.getClientLocation();
-
-    // this.issService.getLocationByIp().subscribe((data:any) => {
-    //   console.log(data);
-    //   this.lat = data.latitude;
-    //   this.lng = data.longitude;
-
-    //   console.log(this.lat);
-    //   console.log(this.lng);
-    // })
+  refresh(){
+    this.drawLine10Times();
   }
 
   populateLocation() {

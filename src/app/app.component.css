@@ -10,8 +10,12 @@ agm-map{
 
 .gm-style div{color:red!important;font-weight: bold}
 
-.col-3 .card{
+.col-lg-3 .card{
     padding: 10px;
+}
+
+.notes{
+    margin-top: 15px;
 }
 
 .card{
