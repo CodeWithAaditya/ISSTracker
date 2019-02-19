@@ -5,23 +5,27 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class IssService {
-
+  public baseUrl = 'https://isstracker.azurewebsites.net/api/iss/';
   constructor(private http: HttpClient) { 
   }
 
   getISSLocation(){
-    return this.http.get('http://api.open-notify.org/iss-now.json');
+    return this.http.get(this.baseUrl + 'now');
   }
 
-  getLocationByIp(){
-    return this.http.get('https://ipapi.co/76.211.118.231/json/');
+  getLocationByIp(ip:string){
+    return this.http.get(`https://ipapi.co/${ip}/json/`);
   }
 
   getPeopleInSpace(){
-    return this.http.get("http://api.open-notify.org/astros.json");
+    return this.http.get(this.baseUrl + 'astros');
   }
 
   getPassTimes(latOfClient: number, lngOfClient: number){
-    return this.http.get(`http://test.mendapump.com/services/webdataservice.asmx/GetPassTime?lat=${latOfClient}&lon=${lngOfClient}`);
+    return this.http.get(`${this.baseUrl}pass?lat=${latOfClient}&lon=${lngOfClient}`);
+  }
+
+  getIP(){
+    return this.http.get('https://api.ipify.org?format=json');
   }
 }

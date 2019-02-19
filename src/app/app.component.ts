@@ -33,7 +33,8 @@ export class AppComponent {
     }, 100000);
 
     this.peopleInSpace();
-    this.passTimes();
+    //this.passTimes();
+    this.getClientLocation();
 
     // this.issService.getLocationByIp().subscribe((data:any) => {
     //   console.log(data);
@@ -70,12 +71,21 @@ export class AppComponent {
     });
   }
 
-  passTimes() {
+  passTimes(lat:number, lon:number) {
     this.issService.getPassTimes(35.73, -78.83).subscribe((data: any) => {
-      this.yourLoc.lat = 35.75;
-      this.yourLoc.lng = -78.83;
+      this.yourLoc.lat = lat;
+      this.yourLoc.lng = lon;
       this.yourLoc.time = new Date(data.response[0].risetime * 1000).toString();
       console.log(new Date(data.response[0].risetime * 1000));
     });
+  }
+
+  getClientLocation(){
+    this.issService.getIP().subscribe((data:any)=>{
+      this.issService.getLocationByIp(data.ip).subscribe((result:any)=>{
+        console.log(result);
+        this.passTimes(result.latitude, result.longitude);
+      })
+    })
   }
 }
